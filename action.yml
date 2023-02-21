@@ -15,5 +15,8 @@ runs:
   steps:
     - run: pip install flexget==${{ inputs.flexget-version }}
       shell: bash
-    - run: flexget check -c ${{ inputs.flexget-config }}
+    - run: |
+        mkdir -p ~/.config/flexget
+        cp ${{ inputs.flexget-config }} ~/.config/flexget/config.yml
+        flexget check
       shell: bash
