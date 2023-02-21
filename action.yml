@@ -1,0 +1,19 @@
+# action.yml
+name: 'Flexget Action'
+description: 'An action to install flexget'
+inputs:
+  flexget-version:
+    description: 'The version of flexget to install'
+    required: true
+    default: '3.5.25'
+  flexget-config:
+    description: 'The path to the flexget config file'
+    required: true
+    default: 'config.yml'
+runs:
+  using: 'composite'
+  steps:
+    - run: pip install flexget==${{ inputs.flexget-version }}
+      shell: bash
+    - run: flexget check -c ${{ inputs.flexget-config }}
+      shell: bash
